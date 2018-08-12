@@ -50,9 +50,18 @@ var personObj={
     },
     //判断是否已签到
     isSign:function () {
-        if(localStorage.getItem("sign")=="signTrue"){
-            $(".btn").html("已签到").css("background","#ccc")
-        }
+        $.ajax({
+            type:"post",
+            url:urlT+"/api/signin/add.json",
+            data:{
+                token:localStorage.getItem("token"),
+            },
+            success:function(data){
+                if(data.code==10011){
+                    $(".btn").html("已签到").css("background","#ccc")
+                }
+            }
+        })
     },
     //签到
     sign:function () {
@@ -63,7 +72,7 @@ var personObj={
                 token:localStorage.getItem("token"),
             },
             success:function(data){
-               // console.log(data)
+                console.log(data)
                 if(data.code==200){
                     //alert("签到成功")
                     $(".btn").html("已签到").css("background","#ccc")
@@ -93,6 +102,8 @@ var personObj={
 personObj.showList();
 //判断是否已签到
 personObj.isSign();
+
+
 
 //毫秒转时间
 function getTime(time) {

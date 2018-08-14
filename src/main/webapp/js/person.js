@@ -52,7 +52,7 @@ var personObj={
     isSign:function () {
         $.ajax({
             type:"post",
-            url:urlT+"/api/signin/add.json",
+            url:urlT+"/api/signin/state.json",
             data:{
                 token:localStorage.getItem("token"),
             },
